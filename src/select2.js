@@ -33,7 +33,11 @@ angular.module('ui.select2', []).value('uiSelect2Config', {}).directive('uiSelec
       return function (scope, elm, attrs, controller) {
         // instance-specific options
         var opts = angular.extend({}, options, scope.$eval(attrs.uiSelect2));
-
+        scope.$watch(attrs.uiSelect2, function(opts) {
+          opts = angular.extend({}, options, scope.$eval(attrs.uiSelect2));
+          console.log(opts);
+          elm.select2(opts);
+        }, true);
         /*
         Convert from Select2 view-model to Angular view-model.
         */
